@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			div {
+				height: 100px;
+				width: 70px;
+				background: url(img/p1.png);
+				background-repeat: no-repeat;
+				background-size: 100% 100%;
+			}
+		</style>
+		<script type="text/javascript" src="js/jquery-2.1.0.js"></script>.
+		<script type="text/javascript" src="js/jquery.rotate.min.js"></script>
+		<script type="text/javascript">
+			function move(){
+				$("#div1").animate({"margin-left":"300px","margin-top":"200px","transform":"rotate(180deg)"},10000);
+			}
+		</script>
+	</head>
+
+	<body>
+		<div id="div1"></div>
+		<button style="margin-top: 100px;" onclick="move()">点击移动</button>
+	</body>
+
+</html>

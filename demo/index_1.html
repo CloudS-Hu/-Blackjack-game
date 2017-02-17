@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<title>Clouds.Hu_21点游戏</title>
+		<script>
+			function start() {
+				var buttonRemove = document.getElementById("buttonR1");
+				buttonRemove.remove();
+			}
+			var array1 = new Array();
+
+			function fapai() /*点击开始-系统每人分两张牌*/ {
+				/*var array1 = new Array();*/
+				/*玩家1发牌*/
+				for (var i = 0; i < 2; i++) {
+					var rand = parseInt(Math.random() * 100) % 52 + 1;
+					array1[i] = rand;
+					if (array1[i] == array1[i - 1]) {
+						i--;
+						continue;
+					} else {
+						var playerOne = document.getElementById("playerOne");
+						var li = document.createElement("li");
+						li.style.background = "url(img/" + rand + ".jpg)";
+						li.style.backgroundSize = "100%";
+						playerOne.appendChild(li);
+					}
+				}
+				var array2 = new Array(); /*玩家2发牌*/
+				/*for (var i = 0; i < 2; i++) {
+					var rand = parseInt(Math.random() * 100) % 52 + 1;
+					array2[i] = rand;
+					if (array2[i] == array2[i - 1]) {
+						i--;
+						continue;
+					} else {
+						var count = 0;
+						for (var j = 0; j < 2; j++) {
+							if (array1[j] == array2[i]) {
+								break;
+							} else {
+								count++;
+							}
+						}
+					}
+					if (count >= 2) {
+						var playerTwo = document.getElementById("playerTwo");
+						var li = document.createElement("li");
+						li.style.background = "url(img/" + rand + ".jpg)";
+						li.style.backgroundSize = "100%";
+						playerTwo.appendChild(li);
+					} else {
+						i--;
+						continue;
+					}
+				}*/
+				/*dfsafgdag*/
+				var sum2 = 0;
+				var i = 0;
+				while (sum2 < 17) {
+					
+					var rand = parseInt(Math.random() * 100) % 20 + 1;
+					var count = 0;
+					array2[i] = rand;
+					for (var k = 0; k < i+1; k++) {
+						if (array2[i] == array2[k-1]) {
+							continue;
+						} else {
+							for (var j = 0; j < 2; j++) {
+								if (array1[j] == array2[i]) {
+									break;
+								} else {
+									count++;
+								}
+							}
+						}
+					}
+					if (count >= 2*array2.length) {
+						var playerTwo = document.getElementById("playerTwo");
+						var li = document.createElement("li");
+						li.style.background = "url(img/" + rand + ".jpg)";
+						li.style.backgroundSize = "100%";
+						playerTwo.appendChild(li);
+						sum2 += (parseInt((array2[i]-1)/4)+1)
+						i++;
+					} else {
+						continue;
+					}
+				}
+				alert(array2);
+				var array3 = new Array(); /*玩家3发牌*/
+				/*for (var i = 0; i < 2; i++) {
+					var rand = parseInt(Math.random() * 100) % 52 + 1;
+					array3[i] = rand;
+					if (array3[i] == array3[i - 1]) {
+						i--;
+						continue;
+					} else {
+						var count = 0;
+						for (var j = 0; j < 2; j++) {
+							if (array1[j] == array3[i] || array2[j] == array3[i]) {
+								break;
+							} else {
+								count++;
+							}
+						}
+					}
+					if (count >= 2) {
+						var playerThree = document.getElementById("playerThree");
+						var li = document.createElement("li");
+						li.style.background = "url(img/" + rand + ".jpg)";
+						li.style.backgroundSize = "100%";
+						playerThree.appendChild(li);
+					} else {
+						i--;
+						continue;
+					}
+				}*/
+				var sum3 = 0;
+				var i = 0;
+				/*alert(array2.length);*/
+				while (sum3 < 17) {
+					var rand = parseInt(Math.random() * 100) % 52 + 1;
+					var count = 0;
+					array3[i] = rand;
+					if (array3[i] == array3[i - 1]) {
+						continue;
+					} else {
+						for (var j = 0; j < array2.length; j++) {
+							if (array1[j] == array3[i] || array2[j] == array3[i]) {
+								break;
+							} else {
+								count++;
+							}
+						}
+					}
+					if (count >= array2.length) {
+						var playerThree = document.getElementById("playerThree");
+						var li = document.createElement("li");
+						li.style.background = "url(img/" + rand + ".jpg)";
+						li.style.backgroundSize = "100%";
+						playerThree.appendChild(li);
+						sum3 += (parseInt((array3[i] - 1) / 4) + 1);
+						i++;
+					} else {
+						continue;
+					}
+				}
+				var array4 = new Array(); /*玩家4发牌*/
+				var sum4 = 0;
+				var i = 0;
+				while (sum4 < 17) {
+					var rand = parseInt(Math.random() * 100) % 52 + 1;
+					var count = 0;
+					array4[i] = rand;
+					if (array4[i] == array4[i - 1]) {
+						continue;
+					} else {
+						for (var j = 0; j < array2.length + array3.length; j++) {
+							if (array1[j] == array4[i] || array2[j] == array4[i] || array3[j] == array4[i]) {
+								break;
+							} else {
+								count++;
+							}
+						}
+					}
+					if (count >= array2.length + array3.length) {
+						var playerThree = document.getElementById("playerFour");
+						var li = document.createElement("li");
+						li.style.background = "url(img/" + rand + ".jpg)";
+						li.style.backgroundSize = "100%";
+						playerFour.appendChild(li);
+						sum4 += (parseInt((array4[i] - 1) / 4) + 1)
+						i++;
+					} else {
+						continue;
+					}
+				}
+				/*for (var i = 0; i < 2; i++) {
+					var rand = parseInt(Math.random() * 100) % 52 + 1;
+					array4[i] = rand;
+					if (array4[i] == array4[i - 1]) {
+						i--;
+						continue;
+					} else {
+						var count = 0;
+						for (var j = 0; j < 2; j++) {
+							if (array1[j] == array4[i] || array2[j] == array4[i] || array3[j] == array4[i]) {
+								break;
+							} else {
+								count++;
+							}
+						}
+					}
+					if (count >= 2) {
+						var playerThree = document.getElementById("playerFour");
+						var li = document.createElement("li");
+						li.style.background = "url(img/" + rand + ".jpg)";
+						li.style.backgroundSize = "100%";
+						playerFour.appendChild(li);
+					} else {
+						i--;
+						continue;
+					}
+				}*/
+				var buttonRemove = document.getElementById("buttonR2");
+				buttonRemove.remove();
+				/*alert(array1);alert(array2);alert(array3);alert(array4);*/
+			}
+			//点击次数
+			var count2 = 0;
+			//要一张牌函数
+			function yaopai() {
+				//循环判断产生的牌跟之前的牌不重复
+				for (var i = 2 + count2; i < 3 + count2; i++) {
+					var rand = parseInt(Math.random() * 100) % 52 + 1;
+					array1[i] = rand;
+					if (array1[i] == array1[0] || array1[i] == array1[1]) {
+						i--;
+						continue;
+					} else {
+						//循环判断不相等次数
+						var count1 = 0;
+						//循环判断
+						for (var j = 1; j < i; j++) {
+							//如果相等
+							if (array1[i] == array1[j]) {
+								//退出
+								break;
+								//如果不相等
+							} else {
+								//循环判断不相等次数加1
+								count1++;
+							}
+						}
+						//判断不相等次数如果大于等于i-1,则发牌
+						if (count1 >= i - 1) {
+							var playerOne = document.getElementById("playerOne");
+							var li = document.createElement("li");
+							li.style.background = "url(img/" + rand + ".jpg)";
+							li.style.backgroundSize = "100%";
+							playerOne.appendChild(li);
+							//如果不相等次数小于i-1
+						} else {
+							//i自减1
+							i--;
+							//重新循环
+							continue;
+						}
+					}
+				}
+				count2++;
+			}
+
+			function al() {
+				alert(array1);
+			}
+			/*alert(array1);*/
+		</script>
+		<style type="text/css">
+			/*javascript_style*/
+			
+			#playerOne {
+				/*玩家1发牌*/
+				border: 1px solid red;
+				margin: 0px 90px 0px;
+				padding: 0px 0px 0px;
+				width: 140px;
+				height: 80px;
+			}
+			
+			#playerOne li {
+				/*玩家1发牌*/
+				list-style-type: none;
+				float: left;
+				margin-left: -25px;
+				border: 1px solid yellow;
+				width: 49.41px;
+				height: 70.59px;
+			}
+			
+			#yaopai li {
+				/*玩家1要牌*/
+				list-style-type: none;
+				float: left;
+				margin-left: -25px;
+				border: 1px solid yellow;
+				width: 49.41px;
+				height: 70.59px;
+			}
+			
+			#playerTwo {
+				/*玩家2发牌*/
+				border: 1px solid red;
+				margin: 0px 35px 0px;
+				padding: 0px 0px 0px;
+				width: 80px;
+				height: 140px;
+				transform: rotate(180deg);
+			}
+			
+			#playerTwo li {
+				/*玩家2发牌*/
+				list-style-type: none;
+				margin-top: -46px;
+				margin-left: 20px;
+				border: 1px solid yellow;
+				width: 49.41px;
+				height: 70.59px;
+				transform: rotate(90deg);
+			}
+			
+			#playerThree {
+				/*玩家3发牌*/
+				border: 1px solid red;
+				margin: 0px 90px 0px;
+				padding: 0px 0px 0px;
+				width: 140px;
+				height: 80px;
+				transform: rotate(180deg);
+			}
+			
+			#playerThree li {
+				/*玩家3发牌*/
+				list-style-type: none;
+				float: left;
+				margin-left: -25px;
+				border: 1px solid yellow;
+				width: 49.41px;
+				height: 70.59px;
+			}
+			
+			#playerFour {
+				/*玩家4发牌*/
+				border: 1px solid red;
+				margin: 0px 30px 0px;
+				padding: 0px 0px 0px;
+				width: 80px;
+				height: 140px;
+				transform: rotate(0deg);
+			}
+			
+			#playerFour li {
+				/*玩家4发牌*/
+				list-style-type: none;
+				margin-top: -47px;
+				margin-left: 20px;
+				border: 1px solid yellow;
+				width: 49.41px;
+				height: 70.59px;
+				transform: rotate(90deg);
+			}
+		</style>
+		<style type="text/css">
+			/*html_style*/
+			
+			.big_div {
+				border: 8px solid #2d2115;
+				background-color: #3F1902;
+				position: relative;
+				width: 900px;
+				height: 640px;
+				margin: auto;
+			}
+			
+			.s_div1 {
+				border: 2px solid white;
+				left: 50%;
+				margin-left: -230px;
+				position: absolute;
+				bottom: 0px;
+				width: 460px;
+				height: 210px;
+			}
+			
+			.xs_div1_1 {
+				border: 1px solid black;
+				width: 100%;
+				height: 25px;
+			}
+			
+			.xs_div1_2 {
+				border: 1px solid black;
+				text-align: end;
+				width: 100%;
+				height: 30px;
+			}
+			
+			.xs_div1_2 button {
+				height: 100%;
+				width: 50px;
+				background-color: darkcyan;
+				font-size: 16px;
+				font-weight: bolder;
+				color: greenyellow;
+				border: 1px solid green;
+			}
+			
+			.xs_div1_3 {
+				border: 1px solid black;
+				width: 100%;
+				height: 150px;
+			}
+			
+			.xs_div1_3 table {
+				border-spacing: 0px;
+				border: 2px solid black;
+				width: 100%;
+				height: 100%;
+			}
+			
+			.xs_div1_3_table_td1 {
+				border: 2px solid black;
+				width: 140px;
+				height: 140px;
+				background: url(img/头像7.jpg);
+				background-size: 100%;
+			}
+			
+			.xs_div1_3_table_td2 {
+				border: 2px solid black;
+				padding: 0px 0px 0px;
+			}
+			
+			.s_div2 {
+				border: 2px solid white;
+				position: absolute;
+				right: 0px;
+				top: 50%;
+				margin-top: -230px;
+				width: 210px;
+				height: 460px;
+			}
+			
+			.xs_div2_1 {
+				border: 1px solid black;
+				float: left;
+				width: 55px;
+				height: 99%;
+			}
+			
+			.xs_div2_2 {
+				border: 1px solid black;
+				width: 150px;
+				height: 99%;
+				float: left;
+			}
+			
+			.xs_div2_2 table {
+				border-spacing: 0px;
+				border: 1px solid black;
+				width: 100%;
+				height: 100%;
+			}
+			
+			.xs_div2_2_table_td1 {
+				border: 1px solid black;
+				padding: 0px 0px 0px;
+			}
+			
+			.xs_div2_2_table_td2 {
+				border: 1px solid black;
+				width: 140px;
+				height: 140px;
+				background: url(img/头像6.jpg);
+				background-size: 100%;
+			}
+			
+			.s_div3 {
+				border: 2px solid white;
+				position: absolute;
+				top: 0;
+				left: 50%;
+				margin-left: -230px;
+				width: 460px;
+				height: 210px;
+			}
+			
+			.xs_div3_1 {
+				border: 1px solid black;
+				width: 100%;
+				height: 150px;
+			}
+			
+			.xs_div3_1 table {
+				border-spacing: 0px;
+				border: 1px solid black;
+				width: 100%;
+				height: 100%;
+			}
+			
+			.xs_div3_1_table_td1 {
+				border: 1px solid black;
+				padding: 0px 0px 0px;
+			}
+			
+			.xs_div3_1_table_td2 {
+				border: 1px solid black;
+				width: 140px;
+				height: 140px;
+				background: url(img/头像5.jpg);
+				background-size: 100%;
+			}
+			
+			.xs_div3_2 {
+				border: 1px solid black;
+				width: 100%;
+				height: 55px;
+			}
+			
+			.s_div4 {
+				border: 2px solid white;
+				position: absolute;
+				left: 0px;
+				top: 50%;
+				margin-top: -230px;
+				width: 210px;
+				height: 460px;
+			}
+			
+			.xs_div4_1 {
+				border: 1px solid black;
+				width: 150px;
+				height: 99%;
+				float: left;
+			}
+			
+			.xs_div4_1 table {
+				border-spacing: 0px;
+				border: 1px solid black;
+				width: 100%;
+				height: 100%;
+			}
+			
+			.xs_div4_1_table_td1 {
+				border: 1px solid black;
+				width: 140px;
+				height: 140px;
+				background: url(img/头像3.jpg);
+				background-size: 100%;
+			}
+			
+			.xs_div4_1_table_td2 {
+				padding: 0px 0px 0px;
+				border: 1px solid black;
+			}
+			
+			.xs_div4_2 {
+				border: 1px solid black;
+				float: left;
+				width: 55px;
+				height: 99%;
+			}
+			
+			.s_div5 {
+				position: absolute;
+				width: 200px;
+				text-align: center;
+				height: 200px;
+				top: 50%;
+				left: 50%;
+				margin-top: -100px;
+				margin-left: -100px;
+				background: url(img/21图片1.jpg);
+				background-size: 100%;
+			}
+			
+			.s_div5 button {
+				background-color: #ef8551;
+				position: absolute;
+				font-size: 80px;
+				font-weight: bolder;
+				color: white;
+				border: 2px solid darkgray;
+				margin-top: 75px;
+				width: 100%;
+				height: 100%;
+				top: -75px;
+				left: 0px;
+			}
+			
+			.s_button {
+				position: absolute;
+				width: 200px;
+				text-align: center;
+				height: 200px;
+				font-size: 80px;
+				font-weight: bolder;
+				color: white;
+				top: 50%;
+				left: 50%;
+				margin-top: -100px;
+				margin-left: -100px;
+				background-color: darkcyan;
+				z-index: 1;
+			}
+		</style>
+	</head>
+
+	<body style="background-color:#072853;">
+		<div class="big_div">
+			<div class="s_div1">
+				<!--玩家1-->
+				<div class="xs_div1_1">结果,得分:停/爆停</div>
+				<div class="xs_div1_2">
+					<button onclick="yaopai()">要排</button>&nbsp;
+					<button onclick="al()">停牌</button>
+				</div>
+				<div class="xs_div1_3">
+					<table>
+						<tr>
+							<td class="xs_div1_3_table_td1"></td>
+							<td class="xs_div1_3_table_td2">
+								<!--玩家1发牌位置-->
+								<ul id="playerOne"></ul>
+							</td>
+							<!--玩家1发牌位置-->
+						</tr>
+					</table>
+				</div>
+			</div>
+			<!--玩家1-->
+			<div class="s_div2">
+				<!--玩家2-->
+				<div class="xs_div2_1"></div>
+				<div class="xs_div2_2">
+					<table>
+						<tr>
+							<td class="xs_div2_2_table_td1">
+								<!--玩家2发牌位置-->
+								<ul id="playerTwo"></ul>
+							</td>
+							<!--玩家2发牌位置-->
+						</tr>
+						<tr>
+							<td class="xs_div2_2_table_td2"></td>
+						</tr>
+					</table>
+				</div>
+			</div>
+			<!--玩家2-->
+			<div class="s_div3">
+				<!--玩家3-->
+				<div class="xs_div3_1">
+					<table>
+						<tr>
+							<td class="xs_div3_1_table_td1">
+								<!--玩家3派牌位置-->
+								<ul id="playerThree"></ul>
+							</td>
+							<!--玩家3派牌位置-->
+							<td class="xs_div3_1_table_td2"></td>
+						</tr>
+					</table>
+				</div>
+				<div class="xs_div3_2"></div>
+			</div>
+			<!--玩家3-->
+			<div class="s_div4">
+				<!--玩家4-->
+				<div class="xs_div4_1">
+					<table>
+						<tr>
+							<td class="xs_div4_1_table_td1"></td>
+						</tr>
+						<tr>
+							<td class="xs_div4_1_table_td2">
+								<!--玩家4派牌位置-->
+								<ul id="playerFour"></ul>
+							</td>
+							<!--玩家4派牌位置-->
+						</tr>
+					</table>
+				</div>
+				<div class="xs_div4_2"></div>
+			</div>
+			<!--玩家4-->
+			<button class="s_button" id="buttonR1" onclick="start()">开始游戏</button>
+			<div class="s_div5">
+				<button id="buttonR2" onclick="fapai()">发牌</button>
+			</div>
+			<!--中间背景和开始按钮-->
+		</div>
+	</body>
+
+</html>
